@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block
+    content %}
+    <form method="POST">
+      <h3 align="center">Encriptar</h3>
+      <div class="form-group">
+        <label for="medium">Medio</label>
+        <input
+          type="file"
+          class="form-control"
+          id="medium"
+          name="medium"
+          placeholder="Archivo para encriptar"
+        />
+      </div>
+      <div class="form-group">
+        <label for="message">Mensaje</label>
+        <input
+          type="text"
+          class="form-control"
+          id="message"
+          name="message"
+          placeholder="Ingrese el mensaje"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Ingrese la contraseña"
+        />
+      </div>
+      <br />
+      <button type="submit" class="btn btn-primary">Encriptar</button>
+    </form>
+    {% endblock %}    
