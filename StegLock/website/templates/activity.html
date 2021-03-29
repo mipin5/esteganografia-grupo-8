@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block
+    content %}
+    <h1 align="center">Actividad</h1>
+    <ul class="list-group list-group-flush" id="files">
+      {% for medium in user.mediums %}
+      <li class="list-group-item">
+        {{ medium.name }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endblock %}
