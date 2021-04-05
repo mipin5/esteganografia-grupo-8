@@ -1,6 +1,6 @@
-# esteganografia-grupo-8
-Desarrollo de Aplicaciones en Sistemas de Información<br />
-Grupo 8 - Aplicación de Esteganografía <br />
+# Desarrollo Aplicaciones Sistemas de Información
+LoomWare (Grupo 8)
+Aplicación de Esteganografía (StegLock) <br />
 Integrantes <br />
 - Juan Sebastián Abedrabbo
 - Martín Esparza
