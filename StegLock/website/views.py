@@ -1,6 +1,9 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
-from .models import Medium
+from .models import Medium, Img
+from PIL import Image
+from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 import json
 
