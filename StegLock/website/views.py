@@ -2,6 +2,9 @@ from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
 from .models import Medium
 from . import db
+from PIL import Image
+from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash, check_password_hash
 import json
 
 views = Blueprint('views', __name__)
@@ -14,15 +17,18 @@ def home():
 @views.route('/encrypt', methods=['GET', 'POST'])
 def encrypt():
     if request.method == 'POST':
-        medium = request.form.get('medium')
+        medium = request.files['medium']
         message = request.form.get('message')
         password = request.form.get('password')
-        medium_name = medium[:-4]
-        medium_type = medium[-3:]
-        if len(message) < 1:
+        if not medium:
+            flash('No se encontró ningún medio', category='error')
+        elif len(message) < 1:
             flash('El mensaje es muy corto', category='error')
         else:
-            new_medium = Medium(name=medium_name, mtype=medium_type, password=password, user_id=current_user.id)
+            medium_name = secure_filename(medium.filename)
+            medium_type = medium.medium_type
+            new_medium = Medium(name=medium_name, mtype=medium_type, password=generate_password_hash(
+                password, method='sha256'), user_id=current_user.id)
             db.session.add(new_medium)
             db.session.commit()
             flash('Medio encriptado!', category='success')
