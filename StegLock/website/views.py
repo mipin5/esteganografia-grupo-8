@@ -28,7 +28,7 @@ def encrypt():
             medium_password = generate_password_hash(password, method='sha256')
             if medium_type != 'png'
                 converted_img = Image.open(medium).convert('RGB')
-                converted_img.save(f'{medium_name}{.png}', 'png')
+                converted_img.save(f'{medium_name}.png', 'png')
             medium_file = converted_img.read()
             new_medium = Medium(name=medium_name, mtype=medium_type, password=medium_password, user_id=current_user.id)
             db.session.add(new_medium)
