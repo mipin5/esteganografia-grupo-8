@@ -27,8 +27,8 @@ def encrypt():
         else:
             medium_name = secure_filename(medium.filename)
             medium_type = medium.mimetype
-            new_medium = Medium(name=medium_name, mtype=medium_type, password=generate_password_hash(
-                password, method='sha256'), user_id=current_user.id)
+            medium_password = generate_password_hash(password, method='sha256')
+            new_medium = Medium(name=medium_name, mtype=medium_type, password=medium_password, user_id=current_user.id)
             db.session.add(new_medium)
             db.session.commit()
             flash('Medio encriptado!', category='success')
