@@ -26,7 +26,7 @@ def encrypt():
             flash('El mensaje es muy corto', category='error')
         else:
             medium_name = secure_filename(medium.filename)
-            medium_type = medium.medium_type
+            medium_type = medium.mimetype
             new_medium = Medium(name=medium_name, mtype=medium_type, password=generate_password_hash(
                 password, method='sha256'), user_id=current_user.id)
             db.session.add(new_medium)
