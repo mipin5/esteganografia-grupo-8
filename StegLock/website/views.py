@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
-from .models import Medium, Img
+from .models import Medium
 from PIL import Image
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -26,9 +26,11 @@ def encrypt():
             medium_name = secure_filename(medium.filename)
             medium_type = medium.medium_type
             medium_password = generate_password_hash(password, method='sha256')
-            if medium_type != 'png'
+            if medium_type != 'png':
                 converted_img = Image.open(medium).convert('RGB')
                 converted_img.save(f'{medium_name}.png', 'png')
+            else:
+                medium_file = medium.read()
             medium_file = converted_img.read()
             new_medium = Medium(name=medium_name, mtype=medium_type, password=medium_password, user_id=current_user.id)
             db.session.add(new_medium)
