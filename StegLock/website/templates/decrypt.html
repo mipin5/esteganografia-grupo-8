@@ -24,7 +24,15 @@
       </div>
       <div class="form-group">
         <label for="message">Mensaje</label>
-        <h4>{{ decoded_message }}</h4>
+        <input
+          type="text"
+          class="form-control"
+          id="message"
+          name="message"
+          placeholder="Mensaje"
+          value="{{decoded_message}}"
+          readonly
+        />
       </div>
       <br />
       <button type="submit" class="btn btn-primary">Decriptar</button>

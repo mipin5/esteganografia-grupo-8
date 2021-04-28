@@ -85,9 +85,11 @@ def encrypt():
         flash("Error del sistema", category='error')
         return render_template("encrypt.html", user=current_user)
 
+
 @views.route('/decrypt', methods=['GET', 'POST'])
 def decrypt():
     try:
+        decoded_result = ''
         if request.method == 'POST':
             deleteTempFiles()
             medium = request.files['medium']
@@ -109,17 +111,17 @@ def decrypt():
                     flash('Medio desencriptado!', category='success')
                     return send_file(download_path, as_attachment=True)
                 elif decoded_result == '0':
-                    flash("Contraseña incorrecta!", category='error')
+                    flash('Contraseña incorrecta!', category='error')
                     return render_template("decrypt.html", user=current_user)
                 else:
-                    flash('Medio desencriptado!', category='success')
+                    flash('Medio descifrado!', category='success')
                     return render_template("decrypt.html", user=current_user, decoded_message=decoded_result)
         
         return render_template("decrypt.html", user=current_user)
 
     except:
         flash("Error del sistema", category='error')
-        return render_template("decrypt.html", user=current_user)
+        return render_template("decrypt.html", user=current_user, data=decoded_result)
 
 
 @views.route('/activity', methods=['GET'])

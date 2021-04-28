@@ -2,7 +2,7 @@ from PIL import Image
 
 # Transformar cadena a octetos
 def transformStringToBytes(data):
-    data = f'str={data}=str'
+    #data = f'str={data}=str'
     dataBytes = []
 
     for i in data:
@@ -25,11 +25,10 @@ def transformFileToBytes(file):
 #Codificar cadena en imagen
 def encodeStringInImage(data, image, password='null'):
     password = f'pwd={password}=pwd'
-
-    dataBytes = transformStringToBytes(data)
-    passwordBytes = transformStringToBytes(password)
-    fullData = passwordBytes + dataBytes
-    dataLength = len(fullData)
+    data = f'str={data}=str'
+    message = password + data
+    dataBytes = transformStringToBytes(message)
+    dataLength = len(dataBytes)
     image = image.convert('RGB')
 
     # Coordenadas en imagen
@@ -48,9 +47,9 @@ def encodeStringInImage(data, image, password='null'):
             red = red[:5]
             green = green[:5]
             blue = blue[:5]
-            red += fullData[i][:3]
-            green += fullData[i][3:6]
-            blue += fullData[i][6:]
+            red += dataBytes[i][:3]
+            green += dataBytes[i][3:6]
+            blue += dataBytes[i][6:]
             if(i != dataLength - 1):
                 blue += '1'
             else:
